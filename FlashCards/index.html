@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Miles</title>
+        <link rel="stylesheet" href="./css/style.css" media="screen" title="no title" charset="utf-8">
+        <script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="./js/mousetrap.min.js"></script>
+        <script type="text/javascript" src="./js/reader.js"></script>
+        <script type="text/javascript" src="./js/script.js"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="operator">
+                <button type="button" name="shuffle">Shuffle</button>
+                <button type="button" name="reset">Reset</button>
+            </div>
+            <div class="sample">
+                <div id="drop_zone">Press <span class="keyboard">Enter</span> to upload a file.</div>
+                <output id="list"></output>
+            </div>
+            <input style="display:none;" type="file" id="files" name="files[]" multiple />
+            <p class="df"></p>
+            <div class="main">
+
+            </div>
+        </div>
+        <div class="link" style="position:absolute; right:10px; bottom:10px;">
+            <a href="../" style="color:white;">Reader</a>
+        </div>
+    </body>
+</html>
