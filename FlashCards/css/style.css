@@ -1,6 +1,7 @@
 body {
     background: url('../img/chalk_board_texture_by_blueamnesiac-d4h76qm.png');
-    color: #549076;
+    color: #353535;
+    margin: 0;
     /*font-family: fantasy;*/
 }
 
@@ -13,6 +14,7 @@ div.wrapper {
 div.main, div#main {
     margin: 30px auto;
     width: 98%;
+    text-shadow: 1px 1px 1px #828282;
 }
 
 div.paper {
@@ -88,9 +90,43 @@ div.card {
 }
 
 .operator {
+    color: #bfbfbf;
     text-align: center;
 }
 
 .operator button {
 
+}
+
+.modal-bg {
+    background-color: rgba(67, 82, 76, 0.66);
+    display: none;
+    position: absolute;
+    height:100%;
+    left: 0;
+    top:0;
+    width:100%;
+}
+
+.modal-container {
+    background-color: #fff;
+    border-radius: 7px;
+    box-shadow: 1px 1px 0px 1px #d8d2d2;
+    height: 270px;
+    margin: 300px auto;
+    text-align: center;
+    width: 400px;
+}
+
+.modal-form {
+    line-height: 135px;
+}
+
+button[name=submitSpeed] {
+    color: #f1eaea;
+    border-radius: 5px;
+    border: #e2e2e2 solid 1px;
+    background-color: #335e4b;
+    padding: 5px 90px;
+    cursor: pointer;
 }
