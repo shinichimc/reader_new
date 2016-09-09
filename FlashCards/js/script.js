@@ -4,13 +4,8 @@
 var isSet = false;
 
 var c = '';
-var SPEED = 300;
 var SEPARATOR = '\n';
-var NEXT_KEY = 'right';
-var PREV_KEY = 'left';
-var BREAK_LINE = true;
 var SHUFFLE = true;
-var VANISH_MODE = false;
 $(document).ready(function() {
 
     // ファイル選択
@@ -19,6 +14,12 @@ $(document).ready(function() {
     // ファイルを選ぶ
     Mousetrap.bind('enter', function() {
         $('#files').click();
+    });
+
+    $('.modal-bg').click(function(e) {;
+        if ($(e.target).attr('class') == 'modal-bg') {
+            closeModal();
+        }
     });
 });
 
@@ -63,7 +64,7 @@ function loadFile() {
     if (isSet) return;
 
     var wrp = $('.main');
-    reader(c, wrp, SEPARATOR, SPEED, NEXT_KEY, PREV_KEY, BREAK_LINE, SHUFFLE, VANISH_MODE);
+    reader(c, wrp, SEPARATOR, SHUFFLE);
     wrp
         .css('font-size', '30px')
         .css('text-align', 'center')
@@ -78,4 +79,12 @@ function loadFile() {
     } else {
         alert('failed loading a file. try again')
     }
+}
+
+function openModal() {
+    $('.modal-bg').show();
+}
+
+function closeModal() {
+    $('.modal-bg').hide();
 }

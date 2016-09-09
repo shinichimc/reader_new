@@ -12,8 +12,6 @@
     <body>
         <div class="wrapper">
             <div class="operator">
-                <button type="button" name="shuffle">Shuffle</button>
-                <button type="button" name="reset">Reset</button>
             </div>
             <div class="sample">
                 <div id="drop_zone">Press <span class="keyboard">Enter</span> to upload a file.</div>
@@ -27,6 +25,19 @@
         </div>
         <div class="link" style="position:absolute; right:10px; bottom:10px;">
             <a href="../" style="color:white;">Reader</a>
+        </div>
+        <div class="modal-trigger" style="position:absolute; right:10px; top:10px;">
+            <a href="#" style="color:white;" onclick="openModal();">Set Speed</a>
+        </div>
+        <div class="modal-bg">
+            <div class="modal-container">
+                <p class="modal-form">
+                    set speed: <input type="text" name="speed" value="" autofocus>
+                </p>
+                <p>
+                    <button type="button" name="submitSpeed">PL</button>
+                </p>
+            </div>
         </div>
     </body>
 </html>

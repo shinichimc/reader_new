@@ -1,15 +1,30 @@
-function reader(content, wrp, splitter, speed, nextKey, prevKey, breakLine, shuffle, vanishMode) {
+function reader(content, wrp, splitter, shuffle) {
 
     var isPaused = false;
     var partCount = -1;
-    var inertval = 500;	//何秒毎に処理をするか（ここでは5秒）
     var play = false;
+    var interval = 10;
     var contentSplit = content.split(splitter);
     if (shuffle) {
         contentSplit = shuffleArray(contentSplit);
     }
 
+    function nextCard() {
+        if (partCount < contentSplit.length - 1) {
+            partCount++;
+        } else {
+            play = null;
+            $('.operator').html('stopped');
+        }
+        wrp.html((partCount + 1) + ':' + contentSplit[partCount]);
+    }
+
     Mousetrap.bind('space', function() {
+
+        if (play == null) {
+            Mousetrap.trigger('q');
+            return;
+        }
 
         play = !play;
 
@@ -18,46 +33,55 @@ function reader(content, wrp, splitter, speed, nextKey, prevKey, breakLine, shuf
         } else {
             stopTimer();
         }
-    })
+    });
 
     Mousetrap.bind('q', function() {
+        play = false;
         stopTimer();
+
         partCount = 0;
         wrp.html((partCount + 1) + ':' + contentSplit[partCount]);
-    })
+    });
 
-    $('button[name=shuffle]').on('click', function() {
+    Mousetrap.bind('s', function() {
+
+        play = false;
+        stopTimer();
+
         contentSplit = shuffleArray(contentSplit);
         partCount = 0;
-        alert('array shuffled!');
         wrp.html((partCount + 1) + ':' + contentSplit[partCount]);
     });
 
     //タイマー開始関数
     function startTimer() {
     	//inertvalの秒数毎にsyori関数を実行する。その情報をtimer変数へ入れている。
-    	timer = setInterval(process, inertval);
+    	timer = setInterval(process, interval);
+        $('.operator').html('playing');
     }
 
     //タイマー停止関数
     function stopTimer() {
     	//timer変数を止める
     	clearInterval(timer);
+        $('.operator').html('paused');
     }
 
     function process() {
-    	wrp.html((partCount + 1) + ':' + contentSplit[partCount]);
-        partCount++;
+    	nextCard();
     }
 
-    Mousetrap.bind(nextKey, function() {
-        if (partCount < contentSplit.length - 1) {
-            partCount++;
-        }
-        wrp.html((partCount + 1) + ':' + contentSplit[partCount]);
+    Mousetrap.bind('right', function() {
+        stopTimer();
+        play = false;
+
+        nextCard();
     });
 
-    Mousetrap.bind(prevKey, function() {
+    Mousetrap.bind('left', function() {
+        stopTimer();
+        play = false;
+
         if (partCount > 0) {
             partCount--;
         }
@@ -78,4 +102,12 @@ function reader(content, wrp, splitter, speed, nextKey, prevKey, breakLine, shuf
         }
         return array;
     }
+
+    $(document).ready(function() {
+        $('button[name=submitSpeed]').click(function() {
+            closeModal();
+            SPEED = $('input[name=speed]').val();
+            console.log($('input[name=speed]').val());
+        });
+    });
 }
