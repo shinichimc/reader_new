@@ -6,7 +6,6 @@
         <link rel="stylesheet" href="./css/style.css" media="screen" title="no title" charset="utf-8">
         <script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="./js/mousetrap.min.js"></script>
-        <script type="text/javascript" src="./js/reader.js"></script>
         <script type="text/javascript" src="./js/script.js"></script>
     </head>
     <body>
@@ -23,11 +22,18 @@
 
             </div>
         </div>
-        <div class="link" style="position:absolute; right:10px; bottom:10px;">
-            <a href="../" style="color:white;">Reader</a>
+
+        <div class="corner upper-left" style="position:absolute; left:10px; top:10px;">
+            <a href="#" style="color:white;" onclick="toggleVanish();">Vanish</a>
         </div>
-        <div class="modal-trigger" style="position:absolute; right:10px; top:10px;">
+        <div class="corner upper-right" style="position:absolute; right:10px; top:10px;">
             <a href="#" style="color:white;" onclick="openModal();">Set Speed</a>
+        </div>
+        <div class="corner bottom-left" style="position:absolute; left:10px; bottom:10px;">
+            <a href="#" style="color:white;" onclick="toggleIdxNum();">Toggle Index</a>
+        </div>
+        <div class="corner bottom-right" style="position:absolute; right:10px; bottom:10px;">
+            <a href="../" style="color:white;">Reader</a>
         </div>
         <div class="modal-bg">
             <div class="modal-container">
