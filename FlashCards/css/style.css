@@ -12,9 +12,11 @@ div.wrapper {
 }
 
 div.main, div#main {
+    font-size: 22px;
     margin: 30px auto;
     width: 98%;
-    text-shadow: 1px 1px 1px #828282;
+    text-shadow: 2px 2px 0px #1D1D1D;
+    color: wheat;
 }
 
 div.paper {
@@ -129,4 +131,9 @@ button[name=submitSpeed] {
     background-color: #335e4b;
     padding: 5px 90px;
     cursor: pointer;
+}
+
+.vanish {
+    text-shadow: 1px 1px 0px #181212 !important;
+    color: #2b483e !important;
 }
