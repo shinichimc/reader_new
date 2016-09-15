@@ -1,3 +1,8 @@
+///////////////////
+///////////////////
+//コンテンツセット ///
+///////////////////
+///////////////////
 (function() {
     // http://www.html5rocks.com/ja/tutorials/file/dndfiles/
     // http://www.shurey.com/js/labo/FileAPI.html
@@ -10,19 +15,10 @@
     var NEXT_KEY = 'right';
     var PREV_KEY = 'left';
     var BREAK_LINE = true;
-    var SHUFFLE = true;
+    var SHUFFLE = false;
     var VANISH_MODE = false;
     $(document).ready(function() {
 
-        // $('.df').innerHTML(
-        //       '<p>Speed</p>'
-        //     + '<p>Separator</p>'
-        //     + '<p>Next Key</p>'
-        //     + '<p>Prev Key</p>'
-        //     + '<p>Break Line</p>'
-        //     + '<p>Shuffle</p>'
-        //     + '<p>Vanish Mode</p>'
-        // );
         // ファイル選択
         document.getElementById('files').addEventListener('change', handleFileSelectByButton, false);
 
@@ -90,8 +86,6 @@
       			txt = txt.replace(/>/g, "&gt;"); //置き換え
                 txt = txt.replace(/[\[](.+?)[\]]/g,'<span class="mark">$1</span>');
                 txt = txt.replace(/[\*「](.+?)[\*」]/g,'<span class="strong">$1</span>');
-      			// txt = "<pre>" + txt + "</pre>";
-      			// document.getElementById("main").innerHTML = txt;
                 c = txt;
                 loadFile();
       	  }
@@ -99,7 +93,6 @@
           // Read in the image file as a data URL.
           reader.readAsText(f, 'shift-js');
         }
-        // document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
       }
 
 
@@ -133,9 +126,6 @@
       			txt = txt.replace(/>/g, "&gt;"); //置き換え
                 txt = txt.replace(/[\[](.+?)[\]]/g,'<span class="mark">$1</span>');
                 txt = txt.replace(/[\*「](.+?)[\*」]/g,'<span class="strong">$1</span>');
-      	// 		txt = "<pre>" + txt + "</pre>";
-                // console.log(txt);
-      	// 		document.getElementById("main").innerHTML = txt;
                 c = txt;
                 loadFile();
       	  }
@@ -144,33 +134,42 @@
           reader.readAsText(f, 'utf-8');
 
         }
-        // document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-      }
+    }
 
     function handleDragOver(evt) {
         evt.stopPropagation();
         evt.preventDefault();
         evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
     }
+
 })();
 
-function reader(content, wrp, splitter, speed, nextKey, prevKey, breakLine, shuffle, vanishMode) {
 
-    var INTERVAL = 100; // ms
-    var isPaused = false;
+///////////////////
+///////////////////
+///// Reader //////
+///////////////////
+///////////////////
+function reader(content, wrp, splitter, speed, nextKey, prevKey, breakLine, shuffle, vanishMode) {
+s
     var partCount = 0;
 
+    // コンテンツを取得
     var contentSplit = content.split(splitter);
+
+    // コンテンツをシャッフルする
     if (shuffle) {
         contentSplit = shuffleArray(contentSplit);
     }
+
+    // コンテンツを生成しbodyに埋め込む
     for (var i = 0; i < contentSplit.length; i++) {
-        var part = '<span class="part' + i + '">' + (i + 1) + ' ' + contentSplit[i] + '</span>' + (breakLine ? '<br>' : '');
+        var part = '<span class="part' + i + '">' + contentSplit[i] + '</span>' + (breakLine ? '<br>' : '');
         wrp.append(part);
         $('.part' + i).css('display', 'none');
-
     }
 
+    // Nextkeyで次の行に進む
     Mousetrap.bind(nextKey, function() {
         if ($('.part' + partCount)[0] && $('.part' + partCount).text() == '') {
             partCount++;
@@ -189,6 +188,7 @@ function reader(content, wrp, splitter, speed, nextKey, prevKey, breakLine, shuf
 
     });
 
+    // PreviousKeyで前の行に戻る
     Mousetrap.bind(prevKey, function() {
         if (partCount > 0) {
             partCount--;
@@ -203,25 +203,22 @@ function reader(content, wrp, splitter, speed, nextKey, prevKey, breakLine, shuf
             $('.part' + (partCount - 1)).fadeIn(speed);
         }
     });
-
-    /**
-    * Fisher–Yates shuffle
-    */
-    function shuffleArray(array) {
-        var n = array.length, t, i;
-
-        while (n) {
-            i = Math.floor(Math.random() * n--);
-            t = array[n];
-            array[n] = array[i];
-            array[i] = t;
-        }
-        return array;
-    }
-
 }
 
+/**
+* Fisher–Yates shuffle
+*/
+function shuffleArray(array) {
+    var n = array.length, t, i;
 
+    while (n) {
+        i = Math.floor(Math.random() * n--);
+        t = array[n];
+        array[n] = array[i];
+        array[i] = t;
+    }
+    return array;
+}
 
 // var INTERVAL = 100; // ms
 // var isPaused = false;
