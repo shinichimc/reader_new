@@ -1,6 +1,5 @@
 body {
     background: url('../img/chalk_board_texture_by_blueamnesiac-d4h76qm.png');
-    color: #2d5443;
     /*font-family: fantasy;*/
 }
 
@@ -11,6 +10,7 @@ div.wrapper {
 }
 
 div.main, div#main {
+    color: #7e8c86;
     margin: 30px auto;
     width: 800px;
 }
